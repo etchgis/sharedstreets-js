@@ -19,7 +19,7 @@ import * as fs from "fs";
 import { rmse, resolveHome } from './util';
 
 const { exec } = require('child_process');
-const OSRM = require("osrm");
+const OSRM = require("@project-osrm/osrm");
 const xml = require('xml');
 const stream = require('stream');
 const levelup = require('levelup');
@@ -39,7 +39,7 @@ const SHST_GRAPH_CACHE_DIR = resolveHome('~/.shst/cache/graphs/');
 
 function getOSRMDirectory() {
     
-    const osrmPath =  require.resolve('osrm');
+    const osrmPath =  require.resolve('@project-osrm/osrm');
     const osrmLibPath = path.dirname(osrmPath);
     const osrmDirPath = path.join(osrmLibPath, '..');
 

@@ -204,3 +204,44 @@ yarn run docs
 ```sh
 yarn run bench
 ```
+
+## Etch Development
+
+### Updates
+Remove "osrm"
+Add "@project-osrm/osrm
+
+#### ./src/graph.ts 
+Line 22 change to `const OSRM = require("@project-osrm/osrm");`
+Line 42 change to `const osrmPath =  require.resolve('@project-osrm/osrm');`
+
+#### ./src/tile_index.ts
+Line 336 change to `var coordDistance = distance(previousCoord, geometryFeature.geometry.coordinates[j] as turfHelpers.Coord, {units: 'meters'});`
+
+#### ./test_core.ts
+Line 470 change to `var expected_1b_out:string = JSON.stringify(matchedPointFeatureCollection_1b);`
+
+#### ./test_match.ts
+Line 71 change to `var expected_1b_out:string = JSON.stringify(matchedPointFeatureCollection_1b);`
+
+### Commands Run
+
+```
+nvm use 18.19.1
+npm install
+```
+
+`npm run prepack` failed with a lot of TypeScript errors but was able to run the commands individually.  So: 
+
+```
+rm -rf build
+tsc
+mkdir -p build/src/proto && cp src/proto/*.js build/src/proto/
+oclif-dev manifest
+```
+
+Next install globally with:
+```
+nvm use 18.19.1
+npm install npm install /{path to parent folder}/sharedstreets-js -g
+```
